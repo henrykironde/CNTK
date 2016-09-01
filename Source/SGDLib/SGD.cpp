@@ -42,7 +42,8 @@ template SGD<double>::SGD(const ScriptableObjects::IConfigRecord&);
 template <class ElemType>
 void SGD<ElemType>::Train(shared_ptr<ComputationNetwork> net, DEVICEID_TYPE deviceId,
                           IDataReader* trainSetDataReader,
-                          IDataReader* validationSetDataReader, int startEpoch, bool loadNetworkFromCheckpoint, CudaProfilerTimer& cudaProfilerTimer)
+                          IDataReader* validationSetDataReader, int startEpoch, bool loadNetworkFromCheckpoint,
+                          CudaProfilerTimer& cudaProfilerTimer)
 {
     // log the device we are computing on
     LOGPRINTF(stderr, "%s model with %d nodes", loadNetworkFromCheckpoint ? "Loaded" : "Created", (int)net->GetTotalNumberOfNodes());
@@ -76,8 +77,8 @@ void SGD<ElemType>::Adapt(wstring origModelFileName, wstring refNodeName,
                           IDataReader* trainSetDataReader,
                           IDataReader* validationSetDataReader,
                           const DEVICEID_TYPE deviceId, 
-                          const bool makeMode,
-                          CudaProfilerTimer& cudaProfilerTimer)
+                          CudaProfilerTimer& cudaProfilerTimer,
+                          const bool makeMode)
 {
     int startEpoch = DetermineStartEpoch(makeMode);
     if (startEpoch == m_maxEpochs)
